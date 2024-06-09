@@ -4,18 +4,11 @@ const express = require('express');
 const app = express(); // connected our app with express
 
 dotenv.config({ path: './config.env'});
+require('./db/conn');
 
-const DB = process.env.DATABASE;
+const PORT = process.env.PORT;
 
 
-mongoose.connect(DB, {
-    useNewUrlParser: true,
-    useCreateIndex : true,
-    useUnifiedTopology : true, 
-    useFindAndModify : false
-}).then(() => {
-    console.log('connection successful');
-}).catch((err) => console.log('No connection')); 
 
  // Middleware
  const middleware = (req,res, next) => {
@@ -99,6 +92,6 @@ app.get('/help', (req, res) => {
     res.send('Help/Support Page');
 });
 
-app.listen(3001, () => {
-    console.log('Server is running at port no. 3000');
+app.listen(PORT, () => {
+    console.log('Server is running at port no. ${PORT}');
 })
