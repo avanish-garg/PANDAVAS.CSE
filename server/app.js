@@ -18,7 +18,6 @@ mongoose.connect(DB, {
  // Middleware
  const middleware = (req,res, next) => {
      console.log('Hello my middleware');
-     next();
  }
  middleware();
 
