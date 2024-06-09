@@ -27,12 +27,12 @@ router.post('/register', (req,res) => {
             res.status(201).json({ message:"User Registered Succefully to PANDAVAS.CSE"})
         }).catch((err)=> res.status(500).json({error:"Failed to Register"}));
 
-    })catch(err => { console.log(err); });  
+    }).catch(err => { console.log(err); });  
     
-    // console.log(username);
-    // console.log(email);
-    // // res.json({message:req.body});
-    // //res.send('Mera register page');
+    console.log(username);
+    console.log(email);
+    res.json({message:req.body});
+    res.send('Mera register page');
 });
 
 module.exports = router;

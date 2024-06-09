@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express(); // connected our app with express
 
-dotenv.config({ path: './config.env'});
+dotenv.config({ path : './config.env'});
 require('./db/conn');
 // const User = require('./models/userSchema');
 
@@ -98,6 +98,6 @@ app.get('/help', (req, res) => {
     res.send('Help/Support Page');
 });
 
-app.listen(PORT, () => {
+app.listen( PORT, () => {
     console.log('Server is running at port no. ${PORT}');
 })

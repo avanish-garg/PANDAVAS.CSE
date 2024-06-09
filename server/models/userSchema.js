@@ -27,26 +27,26 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['user', 'admin'],
         default: 'user'
-    },
-    profile: {
-        fullName: {
-            type: String,
-            required: true,
-            trim: true
-        },
-        avatar: {
-            type: String,
-            default: ''
-        },
-        contact: {
-            type: String,
-            trim: true
-        },
-        bio: {
-            type: String,
-            trim: true
-        }
     }
+    // profile: {
+    //     fullName: {
+    //         type: String,
+    //         required: true,
+    //         trim: true
+    //     },
+    //     avatar: {
+    //         type: String,
+    //         default: ''
+    //     },
+    //     contact: {
+    //         type: String,
+    //         trim: true
+    //     },
+    //     bio: {
+    //         type: String,
+    //         trim: true
+    //     }
+    // }
 })
 
 const User = mongoose.model('USER', userSchema);
