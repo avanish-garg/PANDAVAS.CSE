@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
     res.send('Welcome to the Home Page Jai shree ram');
 });
 
+// Using promises
 router.post('/register', (req,res) => {
 
     const{ username, email, password, cpassword, role} = req.body;
@@ -17,7 +18,7 @@ router.post('/register', (req,res) => {
     }
 
     User.findOne({email:email})
-        .then((userExist) => {
+    .then((userExist) => {
         if(userExist){
             return res.status(422).json({error:"Email already exist"});
         } 
@@ -29,10 +30,12 @@ router.post('/register', (req,res) => {
 
     }).catch(err => { console.log(err); });  
     
-    console.log(username);
-    console.log(email);
-    res.json({message:req.body});
-    res.send('Mera register page');
+    // console.log(username);
+    // console.log(email);
+    // res.json({message:req.body});
+    // res.send('Mera register page');
 });
+
+// usign async await
 
 module.exports = router;
