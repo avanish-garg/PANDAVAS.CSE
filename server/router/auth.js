@@ -36,6 +36,30 @@ router.post('/register', (req,res) => {
     // res.send('Mera register page');
 });
 
-// usign async await
+// login route
+router.post('/login', async (req,res) => {
+    // console.log(req.body);
+    //res.json({message : "awesome"});
+
+    try{
+        const {email, password} = req.body;
+
+        if(!email || !password) {
+            return res.status(400).json({error:"Please fill the data"})
+        }
+
+        const userLogin = await User.findOne({email:email});
+        
+        console.log(userLogin);
+        if(!userLogin) {
+            res.status(400).json({error:"User not avaiable"});
+        } else {
+        res.json({message:"User signin successfully"});
+        }
+
+    } catch(err) {
+        console.log(err);
+    }
+}) 
 
 module.exports = router;
