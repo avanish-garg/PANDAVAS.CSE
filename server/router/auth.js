@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router()
@@ -86,10 +87,11 @@ router.post('/login', async (req,res) => {
     //res.json({message : "awesome"});
 
     try{
+        
         const {email, password} = req.body;
 
         if(!email || !password) {
-            return res.status(400).json({error:"Please fill the data"})
+            return res.status(400).json({error:"Please fill the data"});
         }
 
         const userLogin = await User.findOne({email:email});
@@ -100,6 +102,10 @@ router.post('/login', async (req,res) => {
 
         if(userLogin) {
             const isMatch = await bcrypt.compare(password, userLogin.password);
+
+
+            const token = await userLogin.generateAuthToken();
+            console.log(token);
 
             if(!isMatch) {
                 res.status(400).json({error:"Invalid Credentials paas"});
