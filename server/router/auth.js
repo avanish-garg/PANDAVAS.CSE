@@ -9,7 +9,39 @@ router.get('/', (req, res) => {
 });
 
 // Using promises
-router.post('/register', (req,res) => {
+// router.post('/register', (req,res) => {
+
+//     const{ username, email, password, cpassword, role} = req.body;
+
+//     if(!username || !email || !password || !cpassword || !role ) {
+//         return res.status(422).json({error:"Non Correct Field Filling"});
+//     }
+
+//     User.findOne({email:email})
+//     .then((userExist) => {
+//         if(userExist){
+//             return res.status(422).json({error:"Email already exist"});
+//         } 
+//         const user = new User({username, email, password, cpassword, role});
+
+//         // Here we need to some thing to hash password and cpassword before saving
+//         // them in database
+
+//         user.save().then(() => {
+//             res.status(201).json({ message:"User Registered Succefully to PANDAVAS.CSE"})
+//         }).catch((err)=> res.status(500).json({error:"Failed to Register"}));
+
+//     }).catch(err => { console.log(err); });  
+    
+//     //  console.log(username);
+//     //  console.log(email);
+//     //  res.json({message:req.body});
+//     //  res.send('Mera register page');
+// });
+
+
+
+router.post('/register', async (req,res) => {
 
     const{ username, email, password, cpassword, role} = req.body;
 
@@ -17,24 +49,35 @@ router.post('/register', (req,res) => {
         return res.status(422).json({error:"Non Correct Field Filling"});
     }
 
-    User.findOne({email:email})
-    .then((userExist) => {
+    try {
+
+        const userExist = await User.findOne({email:email})
+
         if(userExist){
             return res.status(422).json({error:"Email already exist"});
-        } 
-        const user = new User({username, email, password, cpassword, role});
+        } else if(password != cpassword){
+            return res.status(422).json({error:"Password is not matching"});
+        } else {
+            const user = new User({username, email, password, cpassword, role});
 
-        user.save().then(() => {
-            res.status(201).json({ message:"User Registered Succefully to PANDAVAS.CSE"})
-        }).catch((err)=> res.status(500).json({error:"Failed to Register"}));
-
-    }).catch(err => { console.log(err); });  
+            await user.save();
     
-    // console.log(username);
-    // console.log(email);
-    // res.json({message:req.body});
-    // res.send('Mera register page');
+            res.status(201).json({ message:"User Registered Succefully to PANDAVAS.CSE"})
+        }
+
+       
+
+        
+    } catch (err){
+        console.log(err);
+    }
+
 });
+
+
+
+
+
 
 // login route
 router.post('/login', async (req,res) => {

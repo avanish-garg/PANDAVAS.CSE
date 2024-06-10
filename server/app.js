@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const express = require('express');
-const app = express(); // connected our app with express
+const app = express()// connected our app with express
 
 dotenv.config({ path : './config.env'});
 require('./db/conn');
@@ -18,13 +18,13 @@ const User = require('./models/userSchema');
 
 const PORT = process.env.PORT;
 
-
-
  // Middleware
- const middleware = (req,res, next) => {
+ const middleware = (req,res,next) => {
      console.log('Hello my middleware');
- }
- middleware();
+     next();
+}
+
+app.use(middleware);
 
 // Home Page
 app.get('/', (req, res) => {
@@ -37,7 +37,7 @@ app.get('/signup', (req, res) => {
 });
 
 // Login Page
-app.get('/login', (req, res) => {
+app.get('/login', middleware,(req, res) => {
     res.send('Login Page');
 });
 
@@ -88,7 +88,7 @@ app.get('/spreadsheet-editing', (req, res) => {
 });
 
 // Profile Page
-app.get('/profile', (req, res) => {
+app.get('/profile', middleware, (req, res) => {
     res.send('Profile Page');
 });
 

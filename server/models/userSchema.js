@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
     // Defining the structure of the document
     username: {
         type: String,
         required: true,
-        unique: true,
         trim: true
     },
     email: {
@@ -48,6 +48,18 @@ const userSchema = new mongoose.Schema({
     //     }
     // }
 })
+
+
+
+// Hashing the password
+userSchema.pre('save', async function(next) {
+    console.log("Hi i am inside");
+    if(this.isModified('password')) {
+        this.password=bcrypt.hash(this.password, 12);
+        this.cpassword=bcrypt.hash(this.cpassword, 12);
+    }
+    next();
+});
 
 const User = mongoose.model('User', userSchema);
 
