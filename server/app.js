@@ -41,64 +41,14 @@ app.get('/login', middleware,(req, res) => {
     res.send('Login Page');
 });
 
-// Dashboard Page
-app.get('/dashboard', (req, res) => {
-    console.log('Hello my dashboard');
-    res.send('Dashboard Page');
-});
-
-// Document Editing Page
-app.get('/document-editing', (req, res) => {
-    res.send('Document Editing Page');
-});
-
-// Instant Messaging Page
-app.get('/instant-messaging', (req, res) => {
-    res.send('Instant Messaging Page');
-});
-
-// Video Calls Page
-app.get('/video-calls', (req, res) => {
-    res.send('Video Calls Page');
-});
-
-// Task Management Page
-app.get('/taskmanagement', (req, res) => {
-    res.send('Task Management Page');
-});
-
-// Notification Center
-app.get('/notifications', (req, res) => {
-    res.send('Notification Center');
-});
-
-// Version Control Page
-app.get('/version-control', (req, res) => {
-    res.send('Version Control Page');
-});
-
-// Gamification Page
-app.get('/gamification', (req, res) => {
-    res.send('Gamification Page');
-});
-
-// Spreadsheet Editing Page
-app.get('/spreadsheet-editing', (req, res) => {
-    res.send('Spreadsheet Editing Page');
-});
-
 // Profile Page
-app.get('/profile', middleware, (req, res) => {
+app.get('/aboutus', middleware, (req, res) => {
     res.send('Profile Page');
 });
 
-// Settings Page
-app.get('/settings', (req, res) => {
-    res.send('Settings Page');
-});
 
 // Help/Support Page
-app.get('/help', (req, res) => {
+app.get('/contact', (req, res) => {
     res.send('Help/Support Page');
 });
 
